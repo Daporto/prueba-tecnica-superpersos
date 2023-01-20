@@ -1,0 +1,31 @@
+{
+  "name": "microservicioa",
+  "version": "1.0.0",
+  "description": "microservicio que se encarga de consultar el clima por ciudad o por país.",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daporto/prueba-tecnica-superpersos.git"
+  },
+  "author": "Daniel Porto Rojas <dporto@bancolombia.com.co>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Daporto/prueba-tecnica-superpersos/issues"
+  },
+  "homepage": "https://github.com/Daporto/prueba-tecnica-superpersos#readme",
+  "dependencies": {
+    "axios": "^1.2.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.32.0",
+    "eslint-config-google": "^0.14.0",
+    "nodemon": "^2.0.20"
+  }
+}
