@@ -1,10 +1,16 @@
-const { getForecastWeatherByLatAndLon } = require('../services/weatherForecast.service')
+const { getForecastWeatherByCity } = require('../services/weatherForecast.service');
+const ApiError = require('../utils/errors/ApiError');
+const WeatherForecastSerializer = require('../serializers/WeatherForecastSerializer');
 
-const getWeather = async ( req, res ) =>{
-    const { lat, lon } = req.query;
-    if(!(lat && lon)) return res.status(400).json({message: 'Must supply a latitude and longitude'})
-    const weather = await getForecastWeatherByLatAndLon(lat, lon);
-    return res.status(200).json({weather})
+const getWeather = async (req, res, next) => {
+    try {
+        const { city, state, countryCode } = req.query;
+        if (!(city && state && countryCode)) throw new ApiError('BE-01');
+        const weatherForecast = await getForecastWeatherByCity(city, state, countryCode);
+        return res.status(200).json(new WeatherForecastSerializer(weatherForecast).toJSON());
+    } catch (error) {
+        next(error)
+    }
 }
 
 module.exports = { getWeather }

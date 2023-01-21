@@ -1,0 +1,10 @@
+{
+    "TE-DEFAULT":{
+        "message": "Ups! something went wrong",
+        "statusCode": 500
+    },
+    "TE-01":{
+        "message": "We have problems comunicating with external systems",
+        "statusCode": 500
+    }
+}

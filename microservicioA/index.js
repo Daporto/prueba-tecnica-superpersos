@@ -10,7 +10,6 @@ app.use(express.json());
 app.use('/weather', weatherRouter);
 
 app.use((err, req, res, next) => {
-    console.log("el errorrr final", err)
    if(err && !err.errorCode){
     const newError = new ApiError('TE-DEFAULT');
     res.status(newError.statusCode);
