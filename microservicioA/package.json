@@ -18,11 +18,9 @@
   },
   "homepage": "https://github.com/Daporto/prueba-tecnica-superpersos#readme",
   "dependencies": {
-    "amqplib": "^0.10.3",
     "axios": "^1.2.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "nanoid": "^4.0.0",
     "node-file-logger": "^0.9.5",
     "rewire": "^6.0.0",
     "uuid": "^9.0.0",
