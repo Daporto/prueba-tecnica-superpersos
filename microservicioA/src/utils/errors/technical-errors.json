@@ -6,5 +6,9 @@
     "TE-01":{
         "message": "We have problems comunicating with external systems",
         "statusCode": 500
+    },
+    "TE-02":{
+        "message": "We have some problem in the availability service",
+        "statusCode": 500
     }
 }
