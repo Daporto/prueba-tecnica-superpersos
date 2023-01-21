@@ -1,0 +1,10 @@
+{
+    "BE-01": {
+        "message": "Must supply a city, state and country",
+        "statusCode": 400
+    },
+    "BE-02": {
+        "message": "No data found, please check de city, state and countryCode",
+        "statusCode": 400
+    }
+}

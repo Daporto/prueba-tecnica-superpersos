@@ -1,5 +1,7 @@
-const { GEOCODING_API_URL, API_KEY } = process.env;
+const { API_KEY } = process.env;
 const axios = require('axios');
+const ApiError = require('../utils/errors/ApiError');
+const GEOCODING_API_URL = "https://testingmyapi.com";
 
 const convertCityToCoordinates = async (city, state, countryCode) => {
     try {
@@ -12,8 +14,12 @@ const convertCityToCoordinates = async (city, state, countryCode) => {
                     "Accept": "application/json",
                 }
             });
+        console.log({result})
         const data = result.data;
-        if (data && data[0]) {
+        if(!data) throw new ApiError('TE-01');
+        if (data && Array.isArray(data) && !data[0]) {
+            throw new ApiError('BE-02');
+        }else{
             const coordinates = {
                 lat: data[0].lat,
                 lon: data[0].lon
@@ -21,7 +27,11 @@ const convertCityToCoordinates = async (city, state, countryCode) => {
             return coordinates;
         }
     } catch (error) {
-        console.log(error);
+        if(error.errorCode){
+            throw error
+        }else{
+            throw new ApiError('TE-01');
+        }
     }
 }
 

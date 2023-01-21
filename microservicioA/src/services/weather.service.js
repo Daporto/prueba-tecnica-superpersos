@@ -1,5 +1,6 @@
 const { WEATHER_API_URL, API_KEY } = process.env;
 const { convertCityToCoordinates } = require('./geocoding.service');
+const ApiError = require('../utils/errors/ApiError');
 
 const axios = require('axios');
 
@@ -14,9 +15,15 @@ const getWeatherByCity = async (city, state, countryCode) => {
           "Accept": "application/json",
         }
       })
-    return result.data;
+    const data = result.data;
+    if (!data) throw new ApiError('TE-01');
+    return data;
   } catch (error) {
-    console.log(error);
+    if (error.errorCode) {
+      throw error
+    } else {
+      throw new ApiError('TE-01');
+    }
   }
 }
 
