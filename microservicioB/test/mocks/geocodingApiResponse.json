@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Cartagena",
+        "local_names": {
+            "en": "Cartagena",
+            "fr": "Carthagène",
+            "hu": "Cartagena",
+            "mk": "Картахена",
+            "ru": "Картахена",
+            "uk": "Картахена",
+            "es": "Cartagena de Indias"
+        },
+        "lat": 10.4195841,
+        "lon": -75.5271224,
+        "country": "CO",
+        "state": "Bolívar"
+    }
+]

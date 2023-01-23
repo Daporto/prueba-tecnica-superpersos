@@ -1,12 +1,12 @@
 {
-  "name": "microservicioa",
+  "name": "microserviciob",
   "version": "1.0.0",
-  "description": "microservicio que se encarga de consultar el clima por ciudad o por país.",
+  "description": "microservicio que se encarga de consultar el clima de los porximos 15 días por ciudad o por país.",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "vitest ",
+    "test": "jest",
     "start": "node index.js"
   },
   "repository": {
@@ -23,15 +23,15 @@
     "axios": "^1.2.3",
     "consul": "^1.2.0",
     "dotenv": "^16.0.3",
-    "eureka-js-client": "^4.5.0",
     "express": "^4.18.2",
     "node-file-logger": "^0.9.5",
     "rewire": "^6.0.0",
-    "vitest": "^0.27.2"
+    "sinon": "^15.0.1"
   },
   "devDependencies": {
     "eslint": "^8.32.0",
     "eslint-config-google": "^0.14.0",
+    "jest": "^29.3.1",
     "nodemon": "^2.0.20"
   }
 }
