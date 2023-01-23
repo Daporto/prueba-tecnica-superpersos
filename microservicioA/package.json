@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "vitest "
+    "test": "vitest ",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/Daporto/prueba-tecnica-superpersos#readme",
   "dependencies": {
     "axios": "^1.2.3",
+    "consul": "^1.2.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "node-file-logger": "^0.9.5",

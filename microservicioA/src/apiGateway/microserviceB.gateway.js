@@ -1,12 +1,22 @@
-const { MICROSERVICE_B_URL } = process.env;
+const { MICROSERVICE_B_SERVICE_NAME, MICROSERVICE_B_FORECAST_PATH } = process.env;
 const axios = require('axios');
 const ApiError = require('../utils/errors/ApiError');
-const {generateRequesToEndpointLog} = require('../utils/logGenerator')
+const { generateRequesToEndpointLog } = require('../utils/logGenerator')
+const { getConsulClient } = require('../config/consul.config')
+const consulClient = getConsulClient();
 
 const getWeatherForecast = async (tranId, city, state, countryCode) => {
     try {
+        const availableInstances = await consulClient.health.service({
+            service: MICROSERVICE_B_SERVICE_NAME,
+            passing: true
+        });
+        console.log({node: availableInstances[0].Node});
+        console.log({service: availableInstances[0].Service});
+        const ipAddress = availableInstances[0].Service.Address;
+        const port = availableInstances[0].Service.Port;
         const queries = `city=${city}&state=${state}&countryCode=${countryCode}`
-        const url = `${MICROSERVICE_B_URL}?${queries}`
+        const url = `http://${ipAddress}:${port}${MICROSERVICE_B_FORECAST_PATH}?${queries}`
         const headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
@@ -28,6 +38,7 @@ const getWeatherForecast = async (tranId, city, state, countryCode) => {
         if (error.errorCode) {
             throw error
         } else {
+            console.log(error)
             throw new ApiError('TE-02');
         }
     }

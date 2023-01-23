@@ -1,18 +1,22 @@
 require('dotenv').config();
+const {PORT} = process.env;
 const express = require('express');
 const weatherRouter = require("./src/routes/weatherForecast.routes");
+const indexRouter = require("./src/routes/index.routes");
 const ApiError = require('./src/utils/errors/ApiError');
 const ErrorSerializer = require('./src/serializers/ErrorSerializer');
 const{generateLogError} = require('./src/utils/logGenerator');
 const log = require('node-file-logger');
 const loggerOptions = require('./src/config/logger.config');
+const {registerServiceInConcil} = require('./src/config/consul.config');
 
 const app = express();
-const port = 3001;
 
 log.SetUserOptions(loggerOptions);
+registerServiceInConcil();
 
 app.use(express.json());
+app.use('/', indexRouter);
 app.use('/weatherForecast', weatherRouter);
 
 app.use((err, req, res, next) => {
@@ -28,6 +32,6 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`)
 })

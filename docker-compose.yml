@@ -1,0 +1,54 @@
+version: '3'
+services:
+  microservice-a:
+    build:
+      context: ./microservicioA
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      my-network:
+        ipv4_address: 172.16.238.2
+    hostname: microservice-a
+    env_file:
+      - .env
+    environment:
+     - IP_ADDRESS=172.16.238.2
+     - PORT=3000
+    depends_on:
+      - consul
+  microservice-b:
+    build:
+      context: ./microservicioB
+      dockerfile: dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+    networks:
+      my-network:
+        ipv4_address: 172.16.238.3
+    hostname: microservice-
+    env_file:
+      - .env
+    environment:
+     - IP_ADDRESS=172.16.238.3
+     - PORT=3001
+    depends_on:
+      - consul
+  consul:
+    image: consul
+    ports:
+      - "8500:8500"
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+      - CONSUL_CLIENT_INTERFACE=eth0
+    networks:
+      my-network:
+        ipv4_address: 172.16.238.4
+    hostname: consul
+networks:
+  my-network:
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24

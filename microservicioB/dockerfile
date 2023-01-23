@@ -1,0 +1,20 @@
+# Especifica la imagen base
+FROM node:16
+
+# Crea un directorio para alojar tu aplicación
+RUN mkdir /usr/src/app
+
+# Copia los archivos de tu proyecto al directorio creado
+COPY . /usr/src/app
+
+# Configura el directorio de trabajo
+WORKDIR /usr/src/app
+
+# Instala las dependencias de tu proyecto
+RUN npm install
+
+# Expone el puerto que utilizará tu aplicación en el contenedor
+EXPOSE 3001
+
+# Define el comando para iniciar tu aplicación en el contenedor
+CMD ["npm", "start"]
