@@ -11,8 +11,6 @@ const getWeatherForecast = async (tranId, city, state, countryCode) => {
             service: MICROSERVICE_B_SERVICE_NAME,
             passing: true
         });
-        console.log({node: availableInstances[0].Node});
-        console.log({service: availableInstances[0].Service});
         const ipAddress = availableInstances[0].Service.Address;
         const port = availableInstances[0].Service.Port;
         const queries = `city=${city}&state=${state}&countryCode=${countryCode}`
