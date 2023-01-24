@@ -4,7 +4,7 @@ const WeatherSerializer = require('../serializers/WeatherSerializer')
 const WeatherForecastSerializer = require('../serializers/WeatherForecastSerializer');
 const {getWeatherForecast} = require('../apiGateway/microserviceB.gateway')
 const {generateTranId} = require('../utils/tranIdGenerator');
-const {generateRequestLog, generateRequesToEndpointLog} = require('../utils/logGenerator')
+const { generateRequesToEndpointLog} = require('../utils/logGenerator')
 
 const getWeather = async (req, res, next) => {
     try {
@@ -21,6 +21,7 @@ const getWeather = async (req, res, next) => {
             return res.status(200).json(new WeatherSerializer(weather).toJSON());
         }
     } catch (error) {
+        console.log({error})
         next(error)
     }
 
